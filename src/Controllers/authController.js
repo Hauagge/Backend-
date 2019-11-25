@@ -20,6 +20,7 @@ router.post('/register', async (req, res) => {
         return res.send({ user });
 
     } catch (err) {
+        console.log(err)
         return res.status(400).send({ error: 'Falha ao tentar criar cadastro' })
     }
 });
