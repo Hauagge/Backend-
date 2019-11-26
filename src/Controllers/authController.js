@@ -7,8 +7,8 @@ const User = require('../model/user');
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-    const { usuario } = req.body;
-
+    const  usuario  = req.body;
+    console.log(usuario);
     try {
         
         if (await User.findOne({ usuario }))
@@ -26,15 +26,15 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    const { usuario, senha } = req.body;
-    const user = await User.findOne({ usuario }).select('+senha');
-
+    const usuario = req.body;
+    const user = await User.findOne({ user : usuario.user }).select('+senha');
+    console.log(user)
     if (!user)
         return res.status(400).send({ error: 'Usuário não existe' });
 
 
 
-    if (!await bcrypt.compare(senha, user.senha))
+    if (!await bcrypt.compare(usuario.senha, user.senha))
         return res.status(400).send({ error: 'Senha incorreta' });
 
     res.send({ user })
