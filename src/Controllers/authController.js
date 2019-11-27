@@ -38,6 +38,7 @@ router.post('/login', async (req, res) => {
         return res.status(400).send({ error: 'Senha incorreta' });
 
     res.send({ user })
+    //teste
 });
 
 module.exports = app => app.use('/', router); 
